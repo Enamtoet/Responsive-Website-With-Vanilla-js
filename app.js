@@ -1,12 +1,7 @@
-// Header 
+// *********** Header ***********
 const btn = document.querySelector('.btn')
 const links = document.querySelector('.links')
 const linksContainer = document.querySelector('.links-container')
-
-// btn.addEventListener('click', function(){
-//     linksContainer.classList.toggle('show-links')
-// })
-
 btn.addEventListener('click', function(){
    const linksHeight = links.getBoundingClientRect().height
    const linksContainerHeight = linksContainer.getBoundingClientRect().height
@@ -55,7 +50,7 @@ linksBtns.forEach(function(link){
  })
 })
 
-// Portfolio 
+// *********** Portfolio ***********
 const portfolio =[
    {
       id : 1,
@@ -121,13 +116,22 @@ const portfolio =[
       img: "images/shuffle-08.jpg"
 
    },
+   {
+      id : 8,
+      title:'Inspire',
+      category: 'scan',
+      description: 'Creativity',
+      img: "images/shuffle-08.jpg"
+
+   },
 ]
 
 const portfolioContainer = document.querySelector('.portfolio-content')
-const btns = document.querySelectorAll('.btn')
 window.addEventListener('DOMContentLoaded', function(){
    displayItems(portfolio);
-   filterItems()
+   addButtons()
+   filterItems();
+
 })
 
 
@@ -144,10 +148,40 @@ function displayItems(menu){
    }).join('')
    portfolioContainer.innerHTML = items
 }
+// Add button dynamically
+function addButtons(){
+   const btnContainer = document.querySelector('.btn-container')
+const buttonsCategories = portfolio.reduce(function(value,current){
+   if(!value.includes(current.category)){
+      value.push(current.category)
+   }
+   return value
+
+},["all"])
+
+const buttons = buttonsCategories.map(function(e, index){
+   const activeClass = index === 0 ? 'active' : '';
+
+
+   return `<li><button class="btn-list ${activeClass}" data-id ="${e}">${e}</button></li>
+   `
+}).join("")
+
+btnContainer.innerHTML = buttons
+}
+
 //Filter items
 function filterItems(){
+   const btns = document.querySelectorAll('.btn-list')
    btns.forEach(function(btn){
       btn.addEventListener('click', function(e){
+         // Remove Active class from all elements 
+         btns.forEach(function(btn){
+            btn.classList.remove('active')
+         })
+         // Add Active class in the current element 
+         e.currentTarget.classList.add('active')
+
          const category = e.currentTarget.dataset.id
          const categories = portfolio.filter(function(item){
          return item.category === category
@@ -160,6 +194,6 @@ function filterItems(){
 
       }
 
-      })
-   })
+      });
+   });
 }
