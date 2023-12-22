@@ -91,7 +91,7 @@ function slidePrev(){
 
 // Auto Sliding 
  function autoSliding(){
-   delteInterval = setInterval(timer, 2500);
+   delteInterval = setInterval(timer, 3000);
    function timer(){
       slideNext();
       indicators();
@@ -120,7 +120,6 @@ indicators();
 // Add click event to the indicator 
 function switchImage(current){
    const attribute = current.getAttribute('attr')
-   console.log(attribute)
    current.classList.add('active')
    if (attribute > counter){
       images[counter].style.animation = 'next1 1s ease-in forwards';
@@ -288,3 +287,110 @@ function filterItems(){
       });
    });
 }
+
+
+
+// ********************** Testimonials **********************
+const Testimonials = [
+   {
+      id :0,
+      img:'images/review1.avif',
+      name:"jef marcos",
+      job:'front end developer',
+      description:"The user experience on this website is truly outstanding! Navigating through the different sections is a breeze, and the intuitive design makes it a pleasure to explore. The attention to detail is remarkable, and I can see how these features would enhance any website. Kudos to the developers for creating such a seamless and visually appealing experience!"
+   },
+   {
+      id :1,
+      img:'images/review2.webp',
+      name:"alon mask",
+      job:'space X CEO',
+      description:"I'm blown away by the design and functionality of this demo site. The visuals are stunning, and the interactive elements add a whole new dimension. It's clear that a lot of thought went into creating a website that not only looks good but also performs flawlessly. As a designer myself, I find this platform incredibly inspiring. Can't wait to incorporate "
+   },
+   {
+      id :2,
+      img:'images/review3.jpg',
+      name:"bill john",
+      job:'graphic designer',
+      description:"This demo website is a game-changer! It's like getting a sneak peek into the future of web development. The innovative features, smooth transitions, and creative components showcase what's possible in the digital realm. I appreciate how it caters to both developers and regular users. It's not just a website; it's an experience."
+   }
+]
+const image = document.querySelector('.testimonial-image');
+const fullName = document.querySelector('.testimonial-title');
+const job = document.querySelector('.testimonial-job');
+const description = document.querySelector('.testimonial-description');
+const prev = document.querySelector('.prev-btn');
+const next = document.querySelector('.next-btn');
+const box = document.querySelector('.testimonials-box');
+const bullets = document.querySelectorAll('.bullet');
+
+
+let currentItem = 0
+//  Display personal info 
+
+function personInfo(){
+   const item = Testimonials[currentItem]
+   image.src = item.img
+   fullName.textContent = item.name
+   job.textContent = item.job
+   description.textContent = item.description
+}
+//  Display personal info when window loaded
+window.addEventListener('DOMContentLoaded', function(){
+      personInfo();
+   
+})
+
+next.addEventListener('click', function(){
+   currentItem++
+   if(currentItem > Testimonials.length -1){
+      currentItem = 0
+   }
+   personInfo();
+   bulletsEvent()
+
+})
+prev.addEventListener('click', function(){
+   currentItem--
+   if(currentItem < 0){
+      currentItem = Testimonials.length -1
+   }
+   personInfo();
+   bulletsEvent()
+
+})
+
+// Add auto displing 
+function autoDisplaying(){
+   delteInterval = setInterval(timer, 2000);
+   function timer(){
+      currentItem++
+      if(currentItem > Testimonials.length -1){
+         currentItem = 0
+      }
+      personInfo() ;
+      bulletsEvent()
+   }
+   
+ }
+ autoDisplaying();
+
+//  Stop Set interval when mouseover 
+box.addEventListener('mouseover',()=>{
+   clearInterval(delteInterval)
+})
+
+// displaying reviews when mouse out 
+box.addEventListener('mouseout',()=>{
+   autoDisplaying();
+})
+
+// Add and remove active class from the indicators 
+function bulletsEvent(){
+   for (i = 0; i<bullets.length; i++){
+      bullets[i].className = bullets[i].className.replace(' active', '')
+      bullets[currentItem].classList.add('active')
+   }
+}
+
+
+

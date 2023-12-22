@@ -717,7 +717,57 @@ video{
     margin-bottom: 30px;
     text-align: center;
 }
-.our-skills .container .testimonial .box{
+.our-skills .container .testimonials-box{
+    border: 1px solid #EEE;
+    padding: 20px;
+    border-radius: 1rem;
+    position: relative;
+}
+.our-skills .container .image-container{
+    width: 150px;
+    margin: 10px auto;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.our-skills .container .testimonials-box img{
+    width: 100%;
+}
+.our-skills .container .testimonials-box h3{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.our-skills .container .testimonials-box span{
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    text-transform: capitalize;
+    color: var(--main-color);
+    font-size: .9rem;
+}
+.our-skills .container .testimonials-box p{
+    margin: 20px auto;
+    line-height: 1.9;
+    text-align: center;
+}
+.our-skills .container .buttons-container{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+}
+.our-skills .container .buttons-container button{
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    color: var(--main-color);
+    cursor: pointer;
+}
+/* .our-skills .container .testimonial .box{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -740,7 +790,7 @@ video{
     margin-bottom: 20px;
     color: #AAA;
     font-size: 14px
-}
+} */
 
 .our-skills .container .testimonial .bullets {
     display: flex;
