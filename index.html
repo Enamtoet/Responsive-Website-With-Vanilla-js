@@ -23,7 +23,7 @@
     <!-- Start Header -->
     <header class="header">
         <div class="container">
-                <img src="images/logo.png" alt="logo">
+                <img class="logo" src="images/logo.png" alt="logo">
             <nav>
                 <div class="links-container">
                     <ul class="links">
@@ -47,6 +47,12 @@
     <!-- End Header -->
     <!-- Start Landing -->
     <div class="landing">
+        <div class="slider-container">
+            <img class="slide-image active" src="images/landing.jpg" alt="">
+            <img class="slide-image" src="images/landing1.jpg" alt="">
+            <img class="slide-image" src="images/landing2.jpg" alt="">
+            <img class="slide-image" src="images/landing3.jpg" alt="">
+        </div>
         <div class="overlay">
             <div class="content">
               <div class="text">
@@ -58,13 +64,18 @@
               </div>
             </div>
             <div class="icon">
-                <i class="fa-solid fa-chevron-left"></i>
-                <i class="fa-solid fa-chevron-right"></i>
+                <button class="prev" >      
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="next">      
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
              </div>
                 <ul class="bullets">
-                    <li ></li>
-                    <li class="active"></li>
-                    <li></li>
+                    <li class="dot active" attr="0" onclick="switchImage(this)" ></li>
+                    <li class="dot " attr="1" onclick="switchImage(this)" ></li>
+                    <li class="dot " attr="2" onclick="switchImage(this)"></li>
+                    <li class="dot" attr="3" onclick="switchImage(this)"></li>
                 </ul>
         </div>
     </div>

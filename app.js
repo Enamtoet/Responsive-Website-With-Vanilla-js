@@ -1,4 +1,4 @@
-// *********** Header ***********
+// ********************** Header **********************
 const btn = document.querySelector('.btn')
 const links = document.querySelector('.links')
 const linksContainer = document.querySelector('.links-container')
@@ -50,7 +50,98 @@ linksBtns.forEach(function(link){
  })
 })
 
-// *********** Portfolio ***********
+
+
+
+
+// ********************** Slider **********************
+const images = document.querySelectorAll('.slide-image');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+const dots = document.querySelectorAll('.dot');
+
+let counter = 0;
+
+// Next button 
+nextButton.addEventListener('click',slideNext);
+function slideNext(){
+   images[counter].style.animation = 'next1 1s ease-in forwards';
+   if (counter >= images.length -1 ){
+      counter = 0
+   }else{
+      counter++
+   }
+   images[counter].style.animation = 'next2 1s ease-in forwards';
+   indicators();
+
+}
+// previous button 
+prevButton.addEventListener('click',slidePrev);
+function slidePrev(){
+   images[counter].style.animation = 'prev1 1s ease-in forwards';
+   if (counter == 0  ){
+      counter = images.length -1
+   }else{
+      counter--
+   }
+   images[counter].style.animation = 'prev2 1s ease-in forwards';
+   indicators();
+
+}
+
+// Auto Sliding 
+ function autoSliding(){
+   delteInterval = setInterval(timer, 2500);
+   function timer(){
+      slideNext();
+      indicators();
+
+   }
+   
+ }
+ autoSliding();
+
+//  Stop auto sliding when mouse is over 
+ const landingSlider = document.querySelector('.landing')
+landingSlider.addEventListener('mouseover',function(){
+   clearInterval(delteInterval)
+});
+landingSlider.addEventListener('mouseout',autoSliding);
+
+// Add and remove active class from the indicators 
+function indicators(){
+   for (i = 0; i < dots.length; i++){
+      dots[i].className = dots[i].className.replace(' active', '')
+   }
+   dots[counter].classList.add('active')
+}
+indicators();
+
+// Add click event to the indicator 
+function switchImage(current){
+   const attribute = current.getAttribute('attr')
+   console.log(attribute)
+   current.classList.add('active')
+   if (attribute > counter){
+      images[counter].style.animation = 'next1 1s ease-in forwards';
+      counter = attribute;
+      images[counter].style.animation = 'next2 1s ease-in forwards';
+   }else if (attribute == counter){
+      return;
+   }
+   else{
+      images[counter].style.animation = 'prev1 1s ease-in forwards';
+      counter = attribute;
+      images[counter].style.animation = 'prev2 1s ease-in forwards';
+   }
+indicators();
+}
+
+
+
+
+
+// ********************** Portfolio **********************
 const portfolio =[
    {
       id : 1,
@@ -138,7 +229,7 @@ window.addEventListener('DOMContentLoaded', function(){
  // Function to display portfolio items
 function displayItems(menu){
    const items = menu.map(function(item){
-      return `<div class="box">
+      return `<div class="box ">
       <img src=${item.img} alt="">
       <div class="text">
           <h3>${item.title}</h3>
